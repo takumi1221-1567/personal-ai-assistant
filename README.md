@@ -108,11 +108,34 @@ wrangler pages deploy public --project-name=my-assistant
 | [docs/REPRODUCTION_GUIDE.md](docs/REPRODUCTION_GUIDE.md) | **再現指南書** — 初心者がAIに読ませてゼロから作るための手順＋コピペ用プロンプト |
 | [docs/USAGE.md](docs/USAGE.md) | **使い方ガイド** — ログイン・会話・PWA化などエンドユーザー向け操作 |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | **トラブル対策まとめ** — 開発中に実際にハマった所と解決策の知見集 |
+| [docs/NATIVE_APP_SPEC.md](docs/NATIVE_APP_SPEC.md) | **ネイティブ版 仕様書** — 端末内オフラインAIの設計・データフロー |
+| [docs/NATIVE_APP_BUILD_GUIDE.md](docs/NATIVE_APP_BUILD_GUIDE.md) | **ネイティブ版 作り方手順書** — Xcodeゼロ→実機まで（つまずき集つき） |
+| [docs/NATIVE_APP_USAGE.md](docs/NATIVE_APP_USAGE.md) | **ネイティブ版 使い方** — 同期・オフライン・会話 |
+
+## 📱 ネイティブiOS版（端末内オフラインAI）
+
+Web版とは別に、**iPhone本体だけ・完全オフライン・無制限**で動くネイティブ版も実装。
+通信も母艦も無しで、端末内の小型LLMが自分のメモを参照して答える。
+
+| | |
+|---|---|
+| 📲 **完全オンデバイス** | SwiftUI + **MLX-Swift** + **Qwen2.5-3B(4bit)**。推論はすべてiPhone内 |
+| 🛜 **オフライン動作** | 一度同期すれば、機内モードでも会話＋記憶参照ができる |
+| 🧠 **同じ"記憶"思想** | クラウドの記憶を `/api/vault/export` で端末へ同期 → 端末内で日本語キーワード検索して注入 |
+| ♾️ **無制限** | 無料枠・APIコスト・通信に縛られない（品質より無制限を優先した選択肢） |
+
+- ソース: [`ios/`](ios/)（5ファイル・サニタイズ済み） / 同期エンドポイント: [`functions/api/vault/export.js`](functions/api/vault/export.js)
+- 作り方は [docs/NATIVE_APP_BUILD_GUIDE.md](docs/NATIVE_APP_BUILD_GUIDE.md)（初心者向け・実機まで）。
+
+> 設計選択の背景：ブラウザ(WebLLM/WebGPU)はiOS Safariのメモリ制限で0.5〜1B止まり＝品質不足だったため、3Bが実用になるネイティブ化を採用。
 
 ## 🗺 ロードマップ
 
 - [x] クラウド完結バックエンド（記憶参照・推論・会話履歴・Web補完）
 - [x] 記憶の見せ方（自分の記憶として話す PERSONA 制御）
+- [x] ネイティブiOS版：端末内オフライン推論（MLX + Qwen2.5-3B）
+- [x] ネイティブ版：記憶のオフラインRAG（クラウド→端末同期＋端末内検索）
+- [ ] ネイティブ版：音声入力 / 起動時の自動同期 / ストリーミング表示
 - [ ] 音声会話モード / Markdown 表示の強化
 - [ ] Vectorize による意味検索（現状はキーワード検索）
 - [ ] 人格切替 / エージェント / タスク管理
