@@ -101,6 +101,14 @@ wrangler pages deploy public --project-name=my-assistant
 
 ---
 
+## 📚 ドキュメント
+
+| ドキュメント | 内容 |
+|---|---|
+| [docs/REPRODUCTION_GUIDE.md](docs/REPRODUCTION_GUIDE.md) | **再現指南書** — 初心者がAIに読ませてゼロから作るための手順＋コピペ用プロンプト |
+| [docs/USAGE.md](docs/USAGE.md) | **使い方ガイド** — ログイン・会話・PWA化などエンドユーザー向け操作 |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | **トラブル対策まとめ** — 開発中に実際にハマった所と解決策の知見集 |
+
 ## 🗺 ロードマップ
 
 - [x] クラウド完結バックエンド（記憶参照・推論・会話履歴・Web補完）
