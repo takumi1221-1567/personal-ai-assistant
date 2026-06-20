@@ -1,0 +1,24 @@
+# Cloudflare Pages 設定サンプル。
+# 実IDに置き換えて `wrangler.toml` にコピーして使う（wrangler.toml は .gitignore 済み）。
+name = "my-assistant"
+pages_build_output_dir = "public"
+
+# D1: Obsidian ミラー(長期記憶) + 短期会話履歴
+[[d1_databases]]
+binding       = "DB"
+database_name = "my-vault"
+database_id   = "<YOUR_D1_DATABASE_ID>"
+
+# KV: 短期メモ / インデックス
+[[kv_namespaces]]
+binding = "RET_MEMORY"
+id      = "<YOUR_KV_NAMESPACE_ID>"
+
+# Workers AI（埋め込み/フォールバック用に確保。生成は Gemini API を使用）
+[ai]
+binding = "AI"
+
+# シークレット（コードに置かない・`wrangler pages secret put` で設定）:
+#   GEMINI_API_KEY   … 生成LLM(Gemini API)
+#   AINAS3_PASSWORD  … 簡易パスワード認証
+#   CF_SYNC_TOKEN    … Obsidian同期トークン

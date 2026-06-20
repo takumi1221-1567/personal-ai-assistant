@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.local
+.wrangler/
+dist/
+.DS_Store
+
+# 実IDを含む設定はコミットしない（wrangler.toml.example のみ公開）
+wrangler.toml
