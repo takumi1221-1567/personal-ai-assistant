@@ -2,7 +2,7 @@
 
 > A cloud-native, voice-capable personal AI assistant that **doesn't search your notes — it remembers them.**
 
-ChatGPT / Gemini 風のチャット UI を持つ、**個人専属の AI アシスタント**。
+対話型（チャット）UI を持つ、**個人専属の AI アシスタント**。
 自分の Obsidian ナレッジを「外部データベースを検索した結果」としてではなく、
 **AI 自身の記憶**として自然に語ることを設計思想の中心に置いています。
 
